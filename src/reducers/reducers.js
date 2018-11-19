@@ -5,7 +5,6 @@ const initialState = {
     tickets: [{
         id: 0,
         points: 0,
-        totalDays: 0,
     }],
     velocity: {
         averageVelocity: 0
@@ -28,8 +27,9 @@ function tickets(state = initialState.tickets, action) {
                 ...state.slice(action.index + 1)
             ];
         case actionTypes.UPDATE_POINTS:
-            const newState = {...state}
+            const newState = [...state]
             newState[action.id].points = action.value;
+            return newState;
         default:
             return state;
     }

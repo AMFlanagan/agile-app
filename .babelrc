@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    ["babel-plugin-root-import", {
+      "rootPathPrefix": "$",
+      "rootPathSuffix": "./"
+    }]
+  ],
+  "presets": [
+    "@babel/preset-env",
+    ["next/babel", {
+      "preset-env": {
+        "modules": "commonjs"
+      }
+    }]
+  ]
+}

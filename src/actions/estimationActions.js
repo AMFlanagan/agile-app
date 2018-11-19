@@ -13,6 +13,7 @@ export function setAverageVelocity(value) {
 }
 
 export function updatePoints(value, id) {
+    console.log('blah');
     return {
         type: UPDATE_POINTS,
         value: value,
