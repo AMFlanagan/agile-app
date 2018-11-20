@@ -1,13 +1,12 @@
 import { getAverageVelocity } from '../../reducers/reducers';
-// import { updateTicket } from '../../actions/estimationActions';
-import { updatePoints } from '../../actions/estimationActions';
+import { updateTicket } from '../../actions/estimationActions';
 import _ from 'lodash';
 import { Fragment } from 'react';
 import styles from './TicketInput.scss'
 
 import { connect } from 'react-redux';
 
-const TicketInput = ({ id, averageVelocity, points, dispatch }) => {
+const TicketInput = ({ id, averageVelocity = 0, points, dispatch }) => {
     return (
         <Fragment>
             <style jsx>{styles}</style>
@@ -27,7 +26,7 @@ const TicketInput = ({ id, averageVelocity, points, dispatch }) => {
                         </select>
                     </div>
                     <div className="col">
-                        <input className="form-control" onChange={(e) => dispatch(updatePoints(e.target.value, id))} type="number" name="estimated-points" placeholder="Estimated points" ></input>
+                        <input className="form-control" onChange={(e) => dispatch(updateTicket(e.target.value, id, averageVelocity))} type="number" name="estimated-points" placeholder="Estimated points" ></input>
                     </div>
                     {(points && averageVelocity)
                         ? <div className="col">

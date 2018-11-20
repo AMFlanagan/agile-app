@@ -1,7 +1,7 @@
 import { getTickets, getAverageVelocity } from '../../reducers/reducers';
 import { connect } from 'react-redux';
 import TicketInputList from './TicketInputList';
-import { addTicket, delTicket, setAverageVelocity } from '../../actions/estimationActions';
+import { addTicket, delTicket, setAverageVelocity, calculateResults } from '../../actions/estimationActions';
 
 import styles from './OuterForm.scss';
 
@@ -27,7 +27,7 @@ const OuterForm = ({ averageVelocity, tickets, dispatch }) => {
                         <div className="btn btn-secondary btn-block" onClick={() => dispatch(addTicket({ id: tickets.length, points: 0 }))}>+</div>
                     </div>
                     <div className="col-sm-2">
-                        <div className="btn btn-primary btn-block">Calculate</div>
+                        <div onClick={() => dispatch(calculateResults(tickets))} className="btn btn-primary btn-block">Calculate</div>
                     </div>
                 </div>
             </form>

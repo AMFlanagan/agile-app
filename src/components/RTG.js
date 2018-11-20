@@ -9,12 +9,18 @@ export default class RTG extends Component {
       error: null,
       isLoaded: false,
       ticklers: [],
-      ticklerNo: Math.floor(Math.random() * Math.floor(20))
+      ticklerNo: Math.floor(Math.random() * Math.floor(23)),
+      searchNo: Math.floor(Math.random() * Math.floor(2))
     };
   }
 
   componentDidMount() {
-    fetch("https://www.reddit.com/r/TodayILearned/new.json?sort=new")
+    const search = [
+      'new',
+      'hot',
+    ]
+
+    fetch(`https://www.reddit.com/r/TodayILearned/${search[this.state.searchNo]}.json?sort=new`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -37,7 +43,7 @@ export default class RTG extends Component {
 
   update() {
     this.setState({
-      ticklerNo: Math.floor(Math.random() * Math.floor(20))
+      ticklerNo: Math.floor(Math.random() * Math.floor(20)),
     });
   }
 

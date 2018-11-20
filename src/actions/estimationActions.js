@@ -1,26 +1,27 @@
-import { ADD_TICKET, DEL_TICKET, AVG_VELOCITY, UPDATE_POINTS, CALC_TOTAL_DAYS, UPDATE_TICKET } from './actionTypes';
+// import { ADD_TICKET, DEL_TICKET, AVG_VELOCITY, UPDATE_TICKET, CALC_TOTAL_DAYS, UPDATE_TICKET } from './actionTypes';
+import * as a from './actionTypes';
 
 export function addTicket(ticket) {
-    return { type: ADD_TICKET, ticket };
+    return { type: a.ADD_TICKET, ticket };
 }
 
 export function delTicket(index) {
-    return { type: DEL_TICKET, index };
+    return { type: a.DEL_TICKET, index };
 }
 
 export function setAverageVelocity(value) {
-    return { type: AVG_VELOCITY, value };
+    return { type: a.AVG_VELOCITY, value };
 }
 
-export function updatePoints(value, id) {
-    console.log('blah');
+export function updateTicket(points, id, averageVelocity) {
     return {
-        type: UPDATE_POINTS,
-        value: value,
-        id: id
+        type: a.UPDATE_TICKET,
+        points: points,
+        id: id,
+        averageVelocity: averageVelocity
     };
 }
 
-// export function calculateTotalDays() {
-//     return { type: CALC_TOTAL_DAYS };
-// }
+export function calculateResults(tickets) {
+    return { type: a.CALCULATE_RESULTS, tickets };
+}
