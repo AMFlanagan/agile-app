@@ -1,4 +1,3 @@
-// import { ADD_TICKET, DEL_TICKET, AVG_VELOCITY, UPDATE_TICKET, CALC_TOTAL_DAYS, UPDATE_TICKET } from './actionTypes';
 import * as a from './actionTypes';
 
 export function addTicket(ticket) {
@@ -22,6 +21,10 @@ export function updateTicket(points, id, averageVelocity) {
     };
 }
 
-export function calculateResults(tickets) {
-    return { type: a.CALCULATE_RESULTS, tickets };
+export function calculateResults(tickets, contingency) {
+    return { type: a.CALCULATE_RESULTS, tickets, contingency };
+}
+
+export function setContingency(value) {
+    return { type: a.SET_CONTINGENCY, value };
 }

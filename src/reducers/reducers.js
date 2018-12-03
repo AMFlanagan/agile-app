@@ -11,6 +11,7 @@ const initialState = {
     velocity: {
         averageVelocity: 0
     },
+    contingency: 0,
     results: {
         totalDays: 0,
         coplettionDate: new Date()
@@ -51,6 +52,29 @@ function velocity(state = initialState.velocity, action) {
     }
 }
 
+function contingency(state = initialState.contingency, action) {
+    switch (action.type) {
+        case actionTypes.SET_CONTINGENCY:
+        let newState = action.value;
+        return newState;
+    default:
+            return state;
+    }
+}
+
+function calcWorkingDays(fromDate, days, contingency) {
+    console.log(days);
+    days = contingency ? days / ((100-contingency)/100) : null;
+    console.log(days);
+    var count = 0;
+    while (count < days) {
+        fromDate.setDate(fromDate.getDate() + 1);
+        if (fromDate.getDay() != 0 && fromDate.getDay() != 6) // Skip weekends
+            count++;
+    }
+    return fromDate;
+}
+
 function results(state = initialState.results, action) {
     switch (action.type) {
         case actionTypes.CALCULATE_RESULTS:
@@ -59,14 +83,7 @@ function results(state = initialState.results, action) {
                 totalDays += ticket.days
             });
             const startDate = new Date();
-            let completionDate = new Date(
-                startDate.getFullYear(),
-                startDate.getMonth(),
-                startDate.getDate() + totalDays,
-                startDate.getHours(),
-                startDate.getMinutes(),
-                startDate.getSeconds());
-            // console.log(completionDate);
+            const completionDate = calcWorkingDays(startDate, totalDays, action.contingency);
             return Object.assign({}, state, {
                 totalDays: totalDays,
                 completionDate: completionDate
@@ -79,7 +96,8 @@ function results(state = initialState.results, action) {
 export default combineReducers({
     tickets,
     velocity,
-    results
+    results,
+    contingency
 });
 
 export const getTickets = (state) => {
@@ -98,3 +116,6 @@ export const getCompletionDate = (state) => {
     return state.results.completionDate;
 }
 
+export const getContingency = (state) => {
+    return state.contingency;
+}
