@@ -1,4 +1,4 @@
-import { getTotalDays, getCompletionDate, getContingency } from '../../reducers/reducers';
+import { getTotalDays, getCompletionDate, getResultsContingency } from '../../reducers/reducers';
 import dateformat from 'dateformat';
 import { connect } from 'react-redux';
 
@@ -30,7 +30,7 @@ const Results = ({ totalDays, completionDate, contingency }) => {
 const mapStateToProps = state => ({
     totalDays: getTotalDays(state),
     completionDate: getCompletionDate(state),
-    contingency: getContingency(state)
+    contingency: getResultsContingency(state)
 });
 
 export default connect(

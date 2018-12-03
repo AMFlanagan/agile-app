@@ -14,6 +14,7 @@ const initialState = {
     contingency: 0,
     results: {
         totalDays: 0,
+        contingency: 0,
         coplettionDate: new Date()
     }
 };
@@ -63,9 +64,7 @@ function contingency(state = initialState.contingency, action) {
 }
 
 function calcWorkingDays(fromDate, days, contingency) {
-    console.log(days);
     days = contingency ? days / ((100-contingency)/100) : null;
-    console.log(days);
     var count = 0;
     while (count < days) {
         fromDate.setDate(fromDate.getDate() + 1);
@@ -85,8 +84,9 @@ function results(state = initialState.results, action) {
             const startDate = new Date();
             const completionDate = calcWorkingDays(startDate, totalDays, action.contingency);
             return Object.assign({}, state, {
-                totalDays: totalDays,
-                completionDate: completionDate
+                totalDays: _.round(totalDays, 2),
+                completionDate: completionDate,
+                contingency: action.contingency
             });
         default:
             return state;
@@ -118,4 +118,8 @@ export const getCompletionDate = (state) => {
 
 export const getContingency = (state) => {
     return state.contingency;
+}
+
+export const getResultsContingency = (state) => {
+    return state.results.contingency;
 }
