@@ -1,7 +1,7 @@
 import { getTickets, getAverageVelocity, getContingency } from '../../reducers/reducers';
 import { connect } from 'react-redux';
 import TicketInputList from './TicketInputList';
-import { addTicket, delTicket, setAverageVelocity, calculateResults, setContingency } from '../../actions/estimationActions';
+import { addTicket, delTicket, setAverageVelocity, calculateResults, setContingency, clearForm } from '../../actions/estimationActions';
 
 import styles from './OuterForm.scss';
 
@@ -10,7 +10,7 @@ const OuterForm = ({ averageVelocity, tickets, dispatch, contingency }) => {
         <div className="estimator-wrapper">
             <style jsx>{styles}</style>
             <h3><small className="">Estimation Tool</small></h3>
-            <form className="avg-velocity">
+            <form className="estimation-form" id="estimation-form">
                 <div className="form-row align-items-center">
                     <label className="col-sm-1.5 col-form-label">Average Cycle Velocity</label>
                     <div className="col-sm-1">
@@ -18,7 +18,7 @@ const OuterForm = ({ averageVelocity, tickets, dispatch, contingency }) => {
                     </div>
                     <label className="col-sm-1.5 col-form-label">Average Weekly Velocity</label>
                     <div className="col-sm-1">
-                        <input type="text" readOnly className="form-control-plaintext" onChange={(e) => dispatch(setAverageVelocity(e.target.value))} id="average-cycle-velocity" type="number" name="average-cyle-velocity" placeholder={averageVelocity / 2} />
+                        <input type="text" readOnly className="form-control-plaintext" onChange={(e) => dispatch(setAverageVelocity(e.target.value))} id="average-weekly-velocity" type="number" name="average-cyle-velocity" placeholder={averageVelocity / 2} />
                     </div>
                     <label className="col-sm-1.5 col-form-label">Contingency Rate (%)</label>
                     <div className="col-sm-1">
@@ -31,8 +31,12 @@ const OuterForm = ({ averageVelocity, tickets, dispatch, contingency }) => {
                     <div className="col-sm-0.5" >
                         <div className="btn btn-secondary btn-block" onClick={() => dispatch(addTicket({ id: tickets.length, points: 0 }))}>+</div>
                     </div>
-                    <div className="col-sm-2">
+                    <div className="col-sm">
                         <div onClick={() => dispatch(calculateResults(tickets, contingency))} className="btn btn-primary btn-block">Calculate</div>
+                    </div>
+                    <div className="col-sm-1">
+                        <div onClick={() => dispatch(clearForm())}
+                            className="btn btn-secondary btn-block">Clear</div>
                     </div>
                 </div>
             </form>

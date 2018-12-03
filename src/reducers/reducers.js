@@ -56,9 +56,9 @@ function velocity(state = initialState.velocity, action) {
 function contingency(state = initialState.contingency, action) {
     switch (action.type) {
         case actionTypes.SET_CONTINGENCY:
-        let newState = action.value;
-        return newState;
-    default:
+            let newState = action.value;
+            return newState;
+        default:
             return state;
     }
 }
@@ -88,17 +88,29 @@ function results(state = initialState.results, action) {
                 completionDate: completionDate,
                 contingency: action.contingency
             });
+
         default:
             return state;
     }
 }
 
-export default combineReducers({
+const appReducer = combineReducers({
     tickets,
     velocity,
     results,
     contingency
 });
+
+function rootReducer(state, action) {
+    if (action.type === actionTypes.CLEAR_FORM) {
+        document.getElementById('estimation-form').reset();
+        document.getElementById('ticket-input-form').reset();
+        state = undefined;
+    }
+    return appReducer(state, action);
+}
+
+export default rootReducer
 
 export const getTickets = (state) => {
     return state.tickets;

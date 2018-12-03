@@ -29,7 +29,9 @@ const TicketInputList = ({ tickets }) => {
                         </div>
                     </div>
                 </form>
+                <div className='splitter'/>
                 {ticketArray}
+                <div className='splitter'/>
             </div>
     );
 }

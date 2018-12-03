@@ -28,3 +28,7 @@ export function calculateResults(tickets, contingency) {
 export function setContingency(value) {
     return { type: a.SET_CONTINGENCY, value };
 }
+
+export function clearForm() {
+    return { type: a.CLEAR_FORM };
+}

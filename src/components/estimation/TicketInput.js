@@ -10,7 +10,7 @@ const TicketInput = ({ id, tickets, averageVelocity = 0, points, dispatch }) => 
     return (
         <Fragment>
             <style jsx>{styles}</style>
-            <form>
+            <form id="ticket-input-form">
                 <div className="form-row">
                     <div className="col-5">
                         <input className="form-control" type="text" name="title" placeholder="title"></input>
